@@ -18,6 +18,13 @@ class MyButton extends StatelessWidget {
         onPressed: onPressed,
         color: Colors.blue[100],
         child: Text(text),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        padding: EdgeInsets.symmetric(
+          vertical: 12,
+          horizontal: 24,
+        )
       ),
     );
   }
