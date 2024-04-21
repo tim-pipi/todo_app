@@ -9,15 +9,15 @@ class TodoDatabase {
   void createInitialData() {
     todoList = [
       {
-        'taskName': 'Buy groceries',
+        'taskName': 'Tap on the checkbox next to a task to mark it as done',
         'isDone': false,
       },
       {
-        'taskName': 'Clean the house',
+        'taskName': 'Swipe left and click on the bin icon to delete a task',
         'isDone': false,
       },
       {
-        'taskName': 'Cook dinner',
+        'taskName': 'Tap on the "+" button to add a new task',
         'isDone': false,
       },
     ];
