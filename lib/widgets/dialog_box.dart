@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/widgets/mybutton.dart';
 
 class DialogBox extends StatelessWidget {
   final controller;
+  VoidCallback onAdd;
+  VoidCallback onCancel;
 
-  const DialogBox({super.key, required this.controller});
+  DialogBox({
+    super.key, 
+    required this.controller,
+    required this.onAdd,
+    required this.onCancel,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,30 +20,26 @@ class DialogBox extends StatelessWidget {
       content: Container(
         height: 120,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
               controller: controller,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: "Add a New Task",
-              )
+              ),
             ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                MyButton(text: 'Cancel', onPressed: onCancel),
+                MyButton(text: 'Add Task', onPressed: onAdd),
+              ],
+            )
           ]
         )
       ),
-      actions: [
-        TextButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.blue[100]),
-          ),
-          onPressed: () => Navigator.pop(context),
-          child: const Text('Cancel'),
-        ),
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: const Text('Add'),
-        ),
-      ],
     );
   }
 }
