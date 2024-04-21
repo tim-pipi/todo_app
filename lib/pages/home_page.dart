@@ -13,7 +13,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: Colors.blue[100],
       appBar: AppBar(
-        title: const Center(child: Text('To Do App')),
+        title: const Center(child: Text('To Do')),
+        elevation: 0,
       ),
     );
   }
