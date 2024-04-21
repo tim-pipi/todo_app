@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/widgets/todo_tile.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -15,6 +16,11 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Center(child: Text('To Do')),
         elevation: 0,
+      ),
+      body: ListView(
+        children: [
+          TodoTile(),
+        ],
       ),
     );
   }
