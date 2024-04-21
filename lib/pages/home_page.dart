@@ -17,18 +17,35 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final _controller = TextEditingController();
 
-  void checkBoxChanged(bool? value, int index) {
+  void setTaskAsDone(bool? value, int index) {
     setState(() {
       todoList[index]['isDone'] = value!;
     });
   }
 
+  void addNewTask() {
+    setState(() {
+      todoList.add(
+        {
+          'taskName': _controller.text,
+          'isDone': false,
+        }
+      );
+      _controller.clear();
+    });
+    Navigator.pop(context);
+  }
+
   void createNewTask() {
     showDialog(
       context: context,
-      builder: (context) => DialogBox(
-        controller: _controller,
-      ),
+      builder: (context) {
+        return DialogBox(
+          controller: _controller,
+          onAdd: addNewTask,
+          onCancel: () => Navigator.pop(context),
+        );
+      },
     );
   }
 
@@ -52,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
           return TodoTile(
             taskName: todoList[index]['taskName'],
             isDone: todoList[index]['isDone'],
-            onChanged: (value) => checkBoxChanged(value, index),
+            onChanged: (value) => setTaskAsDone(value, index),
           );
         },
       ),
