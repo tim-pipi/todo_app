@@ -16,6 +16,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Center(child: Text('To Do')),
         elevation: 0,
+        backgroundColor: Colors.blue,
       ),
       body: ListView(
         children: [
