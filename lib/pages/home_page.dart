@@ -49,12 +49,26 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  void deleteTask(int index) {
+    setState(() {
+      todoList.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue[100],
       appBar: AppBar(
-        title: const Center(child: Text('To Do')),
+        title: const Center(
+          child: Text(
+            'TO DO',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          )
+        ),
         elevation: 0,
         backgroundColor: Colors.blue,
       ),
@@ -70,6 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
             taskName: todoList[index]['taskName'],
             isDone: todoList[index]['isDone'],
             onChanged: (value) => setTaskAsDone(value, index),
+            onDelete: (context) => deleteTask(index),
           );
         },
       ),
