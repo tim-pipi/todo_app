@@ -5,6 +5,27 @@ class TodoTile extends StatelessWidget {
 
   @override
   Widget build (BuildContext context) {
-    return Container();
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Container(
+        padding: const EdgeInsets.all(12.0),
+        decoration: BoxDecoration(
+          color: Colors.blueAccent[100],
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          children: [
+            // Checkbox
+            Checkbox(
+              value: false,
+              onChanged: (bool? value) {},
+            ),
+
+            // Task Name
+            Text('Todo Task'),
+          ],
+        ),
+      ),
+    );
   }
 }
