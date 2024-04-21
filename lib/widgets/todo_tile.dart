@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 
 class TodoTile extends StatelessWidget {
   final String taskName;
-  bool isDone;
+  final bool isDone;
+  Function(bool?)? onChanged;
 
   TodoTile({
     super.key,
     required this.taskName,
-    this.isDone = false,
+    required this.isDone,
+    required this.onChanged,
   });
 
   @override
@@ -25,7 +27,7 @@ class TodoTile extends StatelessWidget {
             // Checkbox
             Checkbox(
               value: isDone,
-              onChanged: (bool? value) {},
+              onChanged: onChanged,
             ),
 
             // Task Name
