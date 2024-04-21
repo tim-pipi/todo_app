@@ -9,6 +9,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List todoList = [
+    {'taskName': 'Task 1', 'isDone': true},
+    {'taskName': 'Task 2', 'isDone': false},
+  ];
+
+  void checkBoxChanged(bool? value, int index) {
+    setState(() {
+      todoList[index]['isDone'] = value!;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,10 +29,15 @@ class _MyHomePageState extends State<MyHomePage> {
         elevation: 0,
         backgroundColor: Colors.blue,
       ),
-      body: ListView(
-        children: [
-          TodoTile(),
-        ],
+      body: ListView.builder(
+        itemCount: todoList.length,
+        itemBuilder: (context, index) {
+          return TodoTile(
+            taskName: todoList[index]['taskName'],
+            isDone: todoList[index]['isDone'],
+            onChanged: (value) => checkBoxChanged(value, index),
+          );
+        },
       ),
     );
   }
