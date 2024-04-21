@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:todo_app/data/database.dart';
 import 'package:todo_app/widgets/dialog_box.dart';
 import 'package:todo_app/widgets/todo_tile.dart';
 
@@ -10,22 +12,23 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List todoList = [
-    {'taskName': 'Task 1', 'isDone': true},
-    {'taskName': 'Task 2', 'isDone': false},
-  ];
+  // Reference the Hive box
+  final _myBox = Hive.openBox('todoList');
+
+  TodoDatabase db = TodoDatabase();
+
 
   final _controller = TextEditingController();
 
   void setTaskAsDone(bool? value, int index) {
     setState(() {
-      todoList[index]['isDone'] = value!;
+      db.todoList[index]['isDone'] = value!;
     });
   }
 
   void addNewTask() {
     setState(() {
-      todoList.add(
+      db.todoList.add(
         {
           'taskName': _controller.text,
           'isDone': false,
@@ -51,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void deleteTask(int index) {
     setState(() {
-      todoList.removeAt(index);
+      db.todoList.removeAt(index);
     });
   }
 
@@ -78,11 +81,11 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ),
       body: ListView.builder(
-        itemCount: todoList.length,
+        itemCount: db.todoList.length,
         itemBuilder: (context, index) {
           return TodoTile(
-            taskName: todoList[index]['taskName'],
-            isDone: todoList[index]['isDone'],
+            taskName: db.todoList[index]['taskName'],
+            isDone: db.todoList[index]['isDone'],
             onChanged: (value) => setTaskAsDone(value, index),
             onDelete: (context) => deleteTask(index),
           );
